@@ -16,18 +16,12 @@ if __name__ == '__main__':
 
     transactions_train, transactions_test, gender_train, gender_test = functions.load_data(dataDir)
 
-    print(transactions_train)
-    print(transactions_test)
-
     params = functions.model_params()
 
     tqdm_notebook.pandas(desc="Progress:")
 
     data_train = transactions_train.groupby(transactions_train.index).progress_apply(functions.features_creation_basic)
     data_test = transactions_test.groupby(transactions_test.index).progress_apply(functions.features_creation_basic)
-
-    print(data_train)
-    print(data_test)
 
     target = data_train.join(gender_train, how='inner')['gender']
     functions.cv_score(params, data_train, target)

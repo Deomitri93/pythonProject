@@ -26,9 +26,6 @@ def cv_score(params, train, y_true):
                     early_stopping_rounds=10, maximize=True,
                     num_boost_round=10000, nfold=5, stratified=True)
     index_argmax = cv_res['test-auc-mean'].argmax()
-    print('Cross-validation, ROC AUC: {:.3f}+-{:.3f}, Trees: {}'.format(cv_res.loc[index_argmax]['test-auc-mean'],
-                                                                        cv_res.loc[index_argmax]['test-auc-std'],
-                                                                        index_argmax))
 
 
 # Model building + test classification results returning
